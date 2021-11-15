@@ -13,6 +13,5 @@ class PostListCreateApiView(generics.ListCreateAPIView):
 class PostDetailApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-def add2():
-    pass
+
 
