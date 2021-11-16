@@ -34,7 +34,7 @@ INSTALLED_APPS = [
 
 ]
 
-ALLOWED_HOSTS = ['blog.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 

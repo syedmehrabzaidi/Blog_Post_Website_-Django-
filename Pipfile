@@ -9,6 +9,7 @@ djangorestframework = "==3.10.3"
 django-rest-auth = "==0.9.5"
 django-allauth = "==0.40.0"
 djangorestframework-simplejwt = "*"
+gunicorn = "==19.9.0"
 
 [dev-packages]
 
