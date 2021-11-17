@@ -91,16 +91,16 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'mydb6',
-#         'USER': 'myuser6',
-#         'PASSWORD': 'mypass6',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mydb6',
+        'USER': 'myuser6',
+        'PASSWORD': 'mypass6',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -113,16 +113,16 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd6dtrkcj423499',
-        'USER': 'hdyxkruxtqdgzh',
-        'PASSWORD': '2ba8bae4e68002b8ab02047cada3e5c4bb077a60c36a7e7c1ad29947a4a3c536',
-        'HOST': 'ec2-34-198-189-252.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd6dtrkcj423499',
+#         'USER': 'hdyxkruxtqdgzh',
+#         'PASSWORD': '2ba8bae4e68002b8ab02047cada3e5c4bb077a60c36a7e7c1ad29947a4a3c536',
+#         'HOST': 'ec2-34-198-189-252.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
