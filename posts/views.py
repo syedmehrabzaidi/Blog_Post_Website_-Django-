@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from blog.models import Post
@@ -11,7 +11,6 @@ class PostListCreateApiView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
 
 
 

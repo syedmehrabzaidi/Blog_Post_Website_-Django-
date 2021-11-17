@@ -1,4 +1,5 @@
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,8 +48,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',),
 
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.AllowAny', )
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny', )
 
 }
 
@@ -90,14 +91,25 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'mydb6',
+#         'USER': 'myuser6',
+#         'PASSWORD': 'mypass6',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydb6',
-        'USER': 'myuser6',
-        'PASSWORD': 'mypass6',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'd316dnc3n0r3sg',
+        'USER': 'uwbsbhihdpfryl',
+        'PASSWORD': 'c1b91848173a59a6b725c9de4dc5612f850712c09186d9019826c5d5a6e29a5e',
+        'HOST': 'ec2-3-230-149-158.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -135,13 +147,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+django_heroku.settings(locals())
 
 STATICFILES_DIRS = [
     BASE_DIR, "static",
 
 ]
-STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+
+
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
