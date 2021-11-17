@@ -102,13 +102,24 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd316dnc3n0r3sg',
+#         'USER': 'uwbsbhihdpfryl',
+#         'PASSWORD': 'c1b91848173a59a6b725c9de4dc5612f850712c09186d9019826c5d5a6e29a5e',
+#         'HOST': 'ec2-3-230-149-158.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd316dnc3n0r3sg',
-        'USER': 'uwbsbhihdpfryl',
-        'PASSWORD': 'c1b91848173a59a6b725c9de4dc5612f850712c09186d9019826c5d5a6e29a5e',
-        'HOST': 'ec2-3-230-149-158.compute-1.amazonaws.com',
+        'NAME': 'd6dtrkcj423499',
+        'USER': 'hdyxkruxtqdgzh',
+        'PASSWORD': '2ba8bae4e68002b8ab02047cada3e5c4bb077a60c36a7e7c1ad29947a4a3c536',
+        'HOST': 'ec2-34-198-189-252.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

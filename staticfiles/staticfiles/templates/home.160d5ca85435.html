@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<button class="btn_count" type="submit"><b>{{ user_follower }}</b>
+    <a href="{% url 'follower-list' %}">Followers</a></button>
+<button class="btn_count" type="submit"><b>{{ user_count }}</b>
+  <a href="{% url 'following-list' %}">Following</a></button>
+<br>
+{% endif %}
+<table border = "1" style="width:100%">
+    {% for post in object_list %}
+{% if user.is_authenticated %}
+
+
+    <tr>
+        <td>
+<div class="post-entry column">
+    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+     <p>{{ post.body }}</p>
+</div>
+        </td>
+    </tr>
+
+{% endif %}
+
+{% endfor %}
+</table>
+
+<style>
+ .column {
+  float: left;
+  width: 97.5%;
+  padding: 10px;
+  background-color:#ddd;
+}
+</style>
+{% if user.is_authenticated %}
+<a href="api/v1/post/">api |</a>
+<a href="auth/jwt/create/">generate token |</a>
+<a href="auth/jwt/refresh/">refresh</a>{% endif %}
+{% endblock content %}
