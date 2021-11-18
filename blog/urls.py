@@ -1,9 +1,9 @@
 from django.urls import path
 
+from profiles.views import ProfilesDetailView
 from .views import (BlogListView, BlogDetailView,
                     BlogCreateView, BlogUpdateView,
                     BlogDeleteView, follower_list, following_list)
-from profiles.views import ProfilesDetailView
 
 urlpatterns = [
     path(

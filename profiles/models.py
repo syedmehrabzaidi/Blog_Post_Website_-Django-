@@ -1,17 +1,27 @@
-from django.contrib.auth.models import User
+
 from django.db import models
 
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
-class profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, )
-    follower = models.ManyToManyField(User, related_name='follower_r', blank=True, symmetrical=False)
-    following = models.ManyToManyField(User, related_name='following_r', blank=True, symmetrical=False)
+from .managers import CustomUserManager
+
+
+class ProfileCustomUser(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(_('email address'), unique=True)
+    user = models.TextField()
+    follower = models.ManyToManyField('self', related_name='follower_r', blank=True, symmetrical=False)
+    following = models.ManyToManyField('self', related_name='following_r', blank=True, symmetrical=False)
     bio = models.TextField(default='no bio .....')
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    objects = CustomUserManager()
 
     def __str__(self):
-        return str(self.user.username)
+        return self.email
 
-    class Meta:
-        ordering = ('-created_at',)

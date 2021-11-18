@@ -6,7 +6,7 @@ from django.views.generic import (ListView, DetailView,
                                   DeleteView)
 
 from blog_project.tasks import send_mail_func
-from profiles.models import profile
+from profiles.models import ProfileCustomUser
 from .models import Post
 
 
@@ -17,11 +17,13 @@ class BlogListView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
-            my_profile = profile.objects.get(user=self.request.user.id)
+            my_profile = ProfileCustomUser.objects.get(email=self.request.user)
             user_count = my_profile.following.all().count()
             user_follower = my_profile.follower.all().count()
+            res = (str(my_profile).split('@')[0]).upper()
             context["user_count"] = user_count
             context["user_follower"] = user_follower
+            context["res"] = res
         return context
 
 
@@ -39,12 +41,12 @@ class BlogDetailView(DetailView):
         pk = kwargs.get("object").pk
         view_profile_post = Post.objects.get(pk=pk)
         author_id = view_profile_post.author.id
-        author = profile.objects.get(pk=author_id)
+        author = ProfileCustomUser.objects.get(pk=author_id)
         follower_count = author.follower.all().count()
         following_count = author.following.all().count()
         try:
-            my_profile = profile.objects.get(user=self.request.user.id)
-        except profile.DoesNotExist:
+            my_profile = ProfileCustomUser.objects.get(email=self.request.user)
+        except ProfileCustomUser.DoesNotExist:
             pass
 
         if view_profile_post.author in my_profile.following.all():

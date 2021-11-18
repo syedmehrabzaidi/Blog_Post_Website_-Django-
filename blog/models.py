@@ -1,11 +1,13 @@
 from django.db import models
 from django.urls import reverse
 
+from blog_project.settings import AUTH_USER_MODEL
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(
-        'auth.User',
+        AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
     body = models.TextField()
