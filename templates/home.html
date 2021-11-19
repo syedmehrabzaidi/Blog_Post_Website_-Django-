@@ -18,6 +18,11 @@
 <div class="post-entry column">
     <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
      <p>{{ post.body }}</p>
+
+{% if post.image %}
+    <img style="width:10%; height:50px;" src="{{post.image.url}}"/>
+
+    {% endif %}
 </div>
         </td>
     </tr>

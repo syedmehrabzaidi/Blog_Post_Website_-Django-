@@ -176,3 +176,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'Mehrab@patsysjournal.com'
 # add your password here
 EMAIL_HOST_PASSWORD = 'Mehrab123'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

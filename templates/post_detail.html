@@ -7,11 +7,16 @@
 
 <div class="post-entry">
    <h2>{{ post.title }}</h2>
+    <p>Author: <i>{{ post.author|cut:"@gmail.com" }}</i></p>
 <button class="btn_count" type="submit"><b>{{ follower_count }}</b>
         Followers
 </button>
     <button class="btn_count" type="submit"><b>{{ following_count }}</b> Followings</button>
     <p>{{ post.body }}</p>
+{% if post.image %}
+    <img src="{{post.image.url}}" />
+
+    {% endif %}
 </div>
 
 {% if user == post.author %}

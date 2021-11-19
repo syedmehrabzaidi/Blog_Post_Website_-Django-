@@ -62,7 +62,7 @@ class BlogDetailView(DetailView):
 class BlogCreateView(CreateView):
     model = Post
     template_name = 'post_new.html'
-    fields = ['title', 'body']
+    fields = ['title', 'body', 'image']
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
@@ -76,7 +76,7 @@ class BlogCreateView(CreateView):
 class BlogUpdateView(UpdateView):
     model = Post
     template_name = 'post_edit.html'
-    fields = ['title', 'body']
+    fields = ['title', 'body', 'image']
 
 
 class BlogDeleteView(DeleteView):
