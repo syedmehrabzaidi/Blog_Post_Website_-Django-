@@ -1,6 +1,6 @@
-from .views import PostListCreateApiView,\
-    PostDetailApiView, \
-    UserSignUpView
+from .views import (PostListCreateApiView,
+                    PostDetailApiView,
+                    UserSignUpView)
 
 from django.urls import path
 

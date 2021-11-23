@@ -68,3 +68,6 @@ color: red;
   color: black;
   border: 2px solid #4CAF50; /* Green */
 }
+
+.hr { display: block; margin-before: 0.5em; margin-after: 0.5em; margin-start: auto;
+ margin-end: auto; overflow: hidden; border-style: inset; border-width: 1px;}

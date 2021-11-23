@@ -17,6 +17,27 @@
         <td>
 <div class="post-entry column">
     <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+
+
+            <form action="{% url 'post_like' post.pk %}" method="POST">
+	{% csrf_token %}
+
+	{% if post_is_liked %}
+<!--            <button type="submit" name="blogpost_id" value="{{object.id}}" onclick="myFunction(this)" class="fa fa-thumbs-down" ></button>-->
+
+	<button type="submit" name="post_id" value="{{post.pk}}" >Unlike</button>
+	{% else %}
+<!--            <button type="submit" name="blogpost_id" value="{{object.id}}" onclick="myFunction(this)" class="fa fa-thumbs-up" ></button>-->
+
+	<button type="submit" name="post_id" value="{{post.pk}}" >Like</button>
+	{% endif %}
+  </form>
+
+
+
+
+
+
      <p>{{ post.body }}</p>
 
 {% if post.image %}

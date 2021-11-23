@@ -1,13 +1,14 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import (ListView, DetailView,
                                   CreateView, UpdateView,
                                   DeleteView)
 
 from blog_project.tasks import send_mail_func
 from profiles.models import ProfileCustomUser
-from .models import Post
+from .models import Post, Comments
 
 
 class BlogListView(ListView):
@@ -21,6 +22,7 @@ class BlogListView(ListView):
             user_count = my_profile.following.all().count()
             user_follower = my_profile.follower.all().count()
             res = (str(my_profile).split('@')[0]).upper()
+            
             context["user_count"] = user_count
             context["user_follower"] = user_follower
             context["res"] = res
@@ -53,6 +55,14 @@ class BlogDetailView(DetailView):
             check_follow = True
         else:
             check_follow = False
+
+        likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
+        liked = False
+        if likes_connected.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        context['number_of_likes'] = likes_connected.number_of_likes()
+        context['post_is_liked'] = liked
+
         context["follow"] = check_follow
         context["follower_count"] = follower_count
         context["following_count"] = following_count
@@ -69,8 +79,23 @@ class BlogCreateView(CreateView):
         obj = form.save(commit=False)
         obj.author = self.request.user
         obj.save()
-        send_mail_func.delay(obj.author.id)
+        # send_mail_func.delay(obj.author.id)
         return HttpResponseRedirect(self.success_url)
+
+
+class CommentCreateView(CreateView):
+    model = Comments
+    template_name = 'comment.html'
+    fields = ['comments']
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+        obj.post = Post.objects.get(pk=self.kwargs.get('pk'))
+        obj.save()
+        pk = self.kwargs.get('pk')
+        success_url = f'/post/{pk}/'
+        return HttpResponseRedirect(success_url)
 
 
 class BlogUpdateView(UpdateView):
@@ -83,6 +108,29 @@ class BlogDeleteView(DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('home')
+
+
+class LikeView(View):
+    def post(self, request, *args, **kwargs):
+        post = get_object_or_404(Post, id=request.POST.get('blogpost_id'))
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+        return redirect(request.META.get('HTTP_REFERER'))
+
+
+class LikeViewHome(View):
+    def post(self, request, *args, **kwargs):
+        pk = kwargs['pk']
+        post = get_object_or_404(Post, id=pk)
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
 # def detail_page(request, pk):

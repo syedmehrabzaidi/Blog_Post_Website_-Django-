@@ -10,9 +10,7 @@ class FollowView(View):
     def post(self, request, *args, **kwargs):
         my_profile = ProfileCustomUser.objects.get(email=request.user)
         author = request.POST.get('profile_pk')
-        pk = ProfileCustomUser.objects.get(email=author).id
-        obj = ProfileCustomUser.objects.get(pk=pk)
-        print(obj)
+        obj = ProfileCustomUser.objects.get(email=author)
         if obj in my_profile.following.all():
             my_profile.following.remove(obj)
             obj.follower.remove(my_profile.id)

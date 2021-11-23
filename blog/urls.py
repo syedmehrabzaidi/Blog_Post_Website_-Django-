@@ -3,7 +3,8 @@ from django.urls import path
 from profiles.views import ProfilesDetailView
 from .views import (BlogListView, BlogDetailView,
                     BlogCreateView, BlogUpdateView,
-                    BlogDeleteView, follower_list, following_list)
+                    BlogDeleteView, follower_list, following_list,
+                    CommentCreateView, LikeView, LikeViewHome,)
 
 urlpatterns = [
     path(
@@ -19,6 +20,17 @@ urlpatterns = [
     path(
         'post/new/', BlogCreateView.as_view(),
         name='post_new'
+    ),
+    path(
+        'comment/<int:pk>/', CommentCreateView.as_view(),
+        name='post_comment'
+    ),
+    path(
+        'blogpost-like/<int:pk>', LikeView.as_view(),
+        name="blogpost_like"
+    ),path(
+        'post-like/<int:pk>', LikeViewHome.as_view(),
+        name="post_like"
     ),
     path(
         'post/<int:pk>/edit/',

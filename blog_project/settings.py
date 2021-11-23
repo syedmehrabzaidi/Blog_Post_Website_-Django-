@@ -22,8 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     # 3rd-party apps
     'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
+    # 'rest_framework.authtoken',
+    # 'rest_auth',
     'djoser',
     'celery',
 

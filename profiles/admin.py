@@ -8,14 +8,16 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'following','follower'), }),
+        (None, {'fields': ('email', 'password', 'following', 'follower'), }),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
     )
     add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')}
-         ),
+        (
+            None, {
+                'classes': ('wide',),
+                'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')
+            }
+        ),
     )
     search_fields = ('email',)
     ordering = ('email',)
