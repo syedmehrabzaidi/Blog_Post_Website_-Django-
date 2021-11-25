@@ -1,10 +1,10 @@
 from django.urls import path
 
-from profiles.views import ProfilesDetailView
 from .views import (BlogListView, BlogDetailView,
                     BlogCreateView, BlogUpdateView,
                     BlogDeleteView, follower_list, following_list,
-                    CommentCreateView, LikeView, LikeViewHome,)
+                    CommentCreateView, LikeView,
+                    LikeViewHome, MyPDF, )
 
 urlpatterns = [
     path(
@@ -18,6 +18,18 @@ urlpatterns = [
         name='post_detail'
     ),
     path(
+        'blogpost-like/<int:pk>/', LikeView.as_view(),
+        name="blogpost_like"
+    ),
+
+    path(
+        r'^pdf/(?P<pk>\d+)/$',
+        MyPDF.as_view(template_name='post_detail.html',
+                      filename='post_pdf.pdf'),
+        name='pdf-wk'
+    ),
+
+    path(
         'post/new/', BlogCreateView.as_view(),
         name='post_new'
     ),
@@ -25,10 +37,8 @@ urlpatterns = [
         'comment/<int:pk>/', CommentCreateView.as_view(),
         name='post_comment'
     ),
+
     path(
-        'blogpost-like/<int:pk>', LikeView.as_view(),
-        name="blogpost_like"
-    ),path(
         'post-like/<int:pk>', LikeViewHome.as_view(),
         name="post_like"
     ),
@@ -42,11 +52,7 @@ urlpatterns = [
         BlogDeleteView.as_view(),
         name='post_delete'
     ),
-    path(
-        'post/<int:pk>/',
-        ProfilesDetailView.as_view(),
-        name='profile-detail-view'
-    ),
+
     path(
         'follower_list/',
         follower_list,
@@ -59,3 +65,4 @@ urlpatterns = [
     ),
 
 ]
+

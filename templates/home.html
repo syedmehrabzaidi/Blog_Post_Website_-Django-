@@ -10,7 +10,8 @@
 {% endif %}
 <table border = "1" style="width:100%">
     {% for post in object_list %}
-{% if user.is_authenticated %}
+
+
 
 
     <tr>
@@ -48,7 +49,7 @@
         </td>
     </tr>
 
-{% endif %}
+
 
 {% endfor %}
 </table>

@@ -22,8 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     # 3rd-party apps
     'rest_framework',
-    # 'rest_framework.authtoken',
-    # 'rest_auth',
+    'wkhtmltopdf',
     'djoser',
     'celery',
 
@@ -49,7 +48,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',),
 
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny', )
+        'rest_framework.permissions.AllowAny',)
 
 }
 
@@ -104,7 +103,6 @@ DATABASES = {
     }
 }
 
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -150,8 +148,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# blogapi_change bd final (custom model)
+STATIC_ROOT = '/static/'
 STATIC_URL = "/static/"
 django_heroku.settings(locals())
 
@@ -159,7 +157,6 @@ STATICFILES_DIRS = [
     BASE_DIR, "static",
 
 ]
-
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
@@ -173,9 +170,14 @@ EMAIL_USE_TLS = True
 # add the port number of the email server
 EMAIL_PORT = 587
 # add your gamil here
-EMAIL_HOST_USER = 'Mehrab@patsysjournal.com'
+EMAIL_HOST_USER = 'Mehrab@gmail.com'
 # add your password here
 EMAIL_HOST_PASSWORD = 'Mehrab123'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = 'blog4/media'
 MEDIA_URL = '/media/'
+
+WKHTMLTOPDF_CMD_OPTIONS = {
+    'quiet': False,
+}

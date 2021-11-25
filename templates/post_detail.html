@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
-{% load static %}
+
 {% block content %}
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .fa {
@@ -38,9 +40,13 @@ function myFunction(x) {
     <p>{{ post.body }}</p>
 
 
+    <a href="{% url 'pdf-wk' post.pk %}">PDF WKHTML</a><br>
+
+
+
     <!-- LIKES -->
 {% if user.is_authenticated %}
-  <form action="{% url 'blogpost_like' object.id %}" method="POST">
+  <form action="{% url 'blogpost_like' post.id %}" method="POST">
 	{% csrf_token %}
 
 	{% if post_is_liked %}
@@ -106,7 +112,6 @@ function myFunction(x) {
  <a href="{% url 'post_comment' post.pk %}">+ Your Comment</a>
 
 </div>
-
 
 
 

@@ -1,3 +1,5 @@
+from wkhtmltopdf.views import PDFTemplateView
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -22,7 +24,7 @@ class BlogListView(ListView):
             user_count = my_profile.following.all().count()
             user_follower = my_profile.follower.all().count()
             res = (str(my_profile).split('@')[0]).upper()
-            
+
             context["user_count"] = user_count
             context["user_follower"] = user_follower
             context["res"] = res
@@ -133,62 +135,13 @@ class LikeViewHome(View):
         return redirect(request.META.get('HTTP_REFERER'))
 
 
-# def detail_page(request, pk):
-# detail = Post.objects.get(id=pk)
-# serialized_data = CrudSerializer(detail)
-# json_data = JSONRenderer().render(serialized_data.data)
-# return HttpResponse(json_data, content_type='application/json')
+class MyPDF(PDFTemplateView):
+    template_name = 'templates/post_detail.html'
 
+    def get_context_data(self, pk):
+        context = {'post': Post.objects.get(pk=pk)}
+        return context
 
-# def detail_all(request):
-# detail = Post.objects.all()
-# serialized_data = CrudSerializer(detail, many=True)
-# json_data = JSONRenderer().render(serialized_data.data)
-# return HttpResponse(json_data, content_type='application/json')
-
-# @csrf_exempt
-# def detail_create(request):
-# if request.method == "POST":
-#     json_data = request.body
-#     stream = io.BytesIO(json_data)
-#     python_data = JSONParser().parse(stream)
-#     #pythondata.author = 'mehrab'
-#     serializedDATA = CrudSerializer(data=python_data)
-#     if serializedDATA.is_valid():
-#         serializedDATA.save()
-#         res = {'msg': 'Data Created'}
-#         json_data = JSONRenderer().render(res)
-#         return HttpResponse(json_data, content_type='application/json')
-#
-#     json_data = JSONRenderer().render(serializedDATA.errors)
-#     return HttpResponse(json_data, content_type='application/json')
-#
-# if request.method == "PUT":
-#     json_data = request.body
-#     stream = io.BytesIO(json_data)
-#     python_data = JSONParser().parse(stream)
-#     id = python_data.get('id')
-#     pt_id = Post.objects.get(id=id)
-#     serializedDATA = CrudSerializer(pt_id, data=python_data, partial=True)
-#     if serializedDATA.is_valid():
-#         serializedDATA.save()
-#         res = {'msg': 'Data Updated'}
-#         json_data = JSONRenderer().render(res)
-#         return HttpResponse(json_data, content_type='application/json')
-#
-#     json_data = JSONRenderer().render(serializedDATA.errors)
-#     return HttpResponse(json_data, content_type='application/json')
-#
-# if request.method == "DELETE":
-#     json_data = request.body
-#     stream = io.BytesIO(json_data)
-#     python_data = JSONParser().parse(stream)
-#     id = python_data.get('id')
-#     pt_id = Post.objects.get(id=id)
-#     pt_id.delete()
-#     res = {'msg': 'Data Delete'}
-#     json_data = JSONRenderer().render(res)
-#     return HttpResponse(json_data, content_type='application/json')
 
 def follower_list(request):
     return render(request, 'follower_list.html')
@@ -196,3 +149,4 @@ def follower_list(request):
 
 def following_list(request):
     return render(request, 'following_list.html')
+
