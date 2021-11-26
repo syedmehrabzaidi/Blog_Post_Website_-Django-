@@ -181,3 +181,4 @@ MEDIA_URL = '/media/'
 WKHTMLTOPDF_CMD_OPTIONS = {
     'quiet': False,
 }
+
