@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django.urls import reverse, resolve  # new
+from django.urls import reverse, resolve
 
 
-from .forms import CustomUserCreationForm  # new
+from .forms import CustomUserCreationForm
 from accounts.views import SignUpView
 
 
@@ -61,14 +61,11 @@ class SignupPageTests(TestCase):
     def test_signup_form(self):
 
         User = get_user_model()
-
         user = User.objects.create_user(
 
             email='will@email.com',
             password='testpass123'
         )
-
         self.assertEqual(get_user_model().objects.all().count(), 1)
-
         self.assertEqual(get_user_model().objects.all()
                          [0].email, user.email)

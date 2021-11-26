@@ -8,7 +8,6 @@ from django.views.generic import (ListView, DetailView,
                                   CreateView, UpdateView,
                                   DeleteView)
 
-from blog_project.tasks import send_mail_func
 from profiles.models import ProfileCustomUser
 from .models import Post, Comments
 
