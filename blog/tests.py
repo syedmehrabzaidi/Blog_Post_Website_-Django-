@@ -14,12 +14,11 @@ class HomepageTests(TestCase):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
 
-    def test_homepage_template(self):  # new
+    def test_homepage_template(self):
         response = self.client.get('/')
-
         self.assertTemplateUsed(response, 'home.html')
 
-    def test_homepage_contains_correct_html(self):  # new
+    def test_homepage_contains_correct_html(self):
         response = self.client.get('/')
 
         self.assertNotContains(response, 'Homepage', html=True)
@@ -58,6 +57,7 @@ class PostTests(TestCase):
 
         self.assertEqual(f'{self.post.author}', 'will@email.com')
         self.assertEqual(f'{self.post.body}', '25.00')
+        self.assertEqual(f'{self.comments}', 'An excellent review')
 
     def test_post_list_view(self):
         response = self.client.get(reverse('home'))

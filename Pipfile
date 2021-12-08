@@ -27,7 +27,7 @@ django-heroku = "==0.3.1"
 django-rest-auth = "==0.9.5"
 django-templated-mail = "==1.1.1"
 djangorestframework = "*"
-djangorestframework-simplejwt = "==5.0.0"
+djangorestframework-simplejwt = "*"
 djoser = "==2.1.0"
 formatting = "==0.0.1"
 gunicorn = "==19.9.0"
@@ -66,6 +66,8 @@ Pillow = "*"
 django-easy-pdf = "*"
 pdfkit = "*"
 django-wkhtmltopdf = "*"
+djangorestframework-filters = "*"
+django-filter = "*"
 
 [dev-packages]
 
